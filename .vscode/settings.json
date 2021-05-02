@@ -1,5 +1,5 @@
 {
   "editor.formatOnSave": true,
-  "prettier.disableLanguages": ["html"],
+  "prettier.disableLanguages": ["html", "css", "scss"],
   "eslint.workingDirectories": ["typefight/src"]
 }
