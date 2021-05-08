@@ -1,2 +1,6 @@
-<p>NAV game-screen works!</p>
-<router-outlet name=""></router-outlet>
+<nav>
+  <a [routerLink]="['play']">Play</a>
+  <a [routerLink]="['how-to']">How to</a>
+  <a (click)="navigate('scoreboard')">Scoreboard</a>
+</nav>
+<ng-content></ng-content>
