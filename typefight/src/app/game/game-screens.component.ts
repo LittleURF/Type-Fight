@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 interface Screen {
-  outletName: string
+	outletName: string;
 }
 
 @Component({
@@ -10,10 +10,7 @@ interface Screen {
 	styleUrls: ['./game-screens.component.scss'],
 })
 export class GameScreensComponent {
-  screens: Screen[] = [
-    { outletName: 'leftScreen'},
-    { outletName: 'rightScreen'},
-  ]
+	screens: Screen[] = [{ outletName: 'leftScreen' }, { outletName: 'rightScreen' }];
 
 	constructor() {}
 }

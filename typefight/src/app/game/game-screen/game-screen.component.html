@@ -1,6 +1,6 @@
 <nav>
   <a [routerLink]="['play']">Play</a>
-  <a [routerLink]="['how-to']">How to</a>
+  <a [routerLink]="[{ outlets: { leftScreen: ['scoreboard']}}]">How to</a>
   <a (click)="navigate('scoreboard')">Scoreboard</a>
 </nav>
 <ng-content></ng-content>

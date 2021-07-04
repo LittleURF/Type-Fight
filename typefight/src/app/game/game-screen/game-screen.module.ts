@@ -7,11 +7,7 @@ import { HowToComponent } from './how-to/how-to.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 @NgModule({
-	declarations: [
-    PlayComponent,
-    HowToComponent,
-    ScoreboardComponent
-  ],
+	declarations: [PlayComponent, HowToComponent, ScoreboardComponent],
 	imports: [CommonModule, GameScreenRoutingModule],
 })
 export class GameScreenModule {}

@@ -1,8 +1,5 @@
 export class GameScreenRouterService {
+	constructor() {}
 
-  constructor() { }
-
-  navigate(): void {
-
-  }
+	navigate(): void {}
 }

@@ -9,22 +9,27 @@ import { GameScreenRouterService } from './services/game-screen-router.service';
 	declarations: [GameScreensComponent, GameScreenComponent],
 	imports: [
 		CommonModule,
+		// 'game' redirect cause of named outlets bug https://github.com/angular/angular/issues/10726
 		RouterModule.forChild([
-			{ path: '', component: GameScreensComponent },
+			{ path: '', redirectTo: 'game' },
 			{
-				path: '',
-				loadChildren: () => import('./game-screen/game-screen.module').then((m) => m.GameScreenModule),
-				outlet: 'leftScreen',
-			},
-			{
-				path: '',
-				loadChildren: () => import('./game-screen/game-screen.module').then((m) => m.GameScreenModule),
-				outlet: 'rightScreen',
+				path: 'game',
+				component: GameScreensComponent,
+				children: [
+					{
+						path: '',
+						loadChildren: () => import('./game-screen/game-screen.module').then((m) => m.GameScreenModule),
+						outlet: 'leftScreen',
+					},
+					{
+						path: '',
+						loadChildren: () => import('./game-screen/game-screen.module').then((m) => m.GameScreenModule),
+						outlet: 'rightScreen',
+					},
+				],
 			},
 		]),
 	],
-  providers: [
-    GameScreenRouterService
-  ]
+	providers: [GameScreenRouterService],
 })
 export class GameModule {}
