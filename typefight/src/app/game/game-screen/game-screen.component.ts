@@ -1,5 +1,6 @@
 import { GameScreenRouterService } from './../services/game-screen-router.service';
 import { Component, Input, OnInit } from '@angular/core';
+import { Screen } from '../models';
 
 @Component({
 	selector: 'app-game-screen',

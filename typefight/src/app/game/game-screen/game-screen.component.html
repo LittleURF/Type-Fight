@@ -1,6 +1,6 @@
 <nav class="bg-gray-800 text-gray-300 text-lg py-2 pl-3 flex">
-  <a class="px-3" [routerLink]="['play']">Play</a>
-  <a class="px-3" [routerLink]="[{ outlets: { leftScreen: ['scoreboard']}}]">How to</a>
-  <a class="px-3" (click)="navigate('scoreboard')">Scoreboard</a>
+  <a class="px-3" [routerLink]="['play'] | outletRouterLink : screen.outletName">Play</a>
+  <a class="px-3" [routerLink]="['how-to'] | outletRouterLink : screen.outletName">How to</a>
+  <a class="px-3" [routerLink]="['scoreboard'] | outletRouterLink : screen.outletName">Scoreboard</a>
 </nav>
 <ng-content></ng-content>

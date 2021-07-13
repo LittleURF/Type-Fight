@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-
-interface Screen {
-	outletName: string;
-}
+import { Screen } from './models';
 
 @Component({
 	selector: 'app-game',
