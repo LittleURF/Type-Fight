@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameScreensComponent } from './game-screens.component';
+import { GameComponent } from './game.component';
 import { GameScreenComponent } from './game-screen/game-screen.component';
 import { RouterModule } from '@angular/router';
 import { GameScreenRouterService } from './services/game-screen-router.service';
 
 @NgModule({
-	declarations: [GameScreensComponent, GameScreenComponent],
+	declarations: [GameComponent, GameScreenComponent],
 	imports: [
 		CommonModule,
 		// 'game' redirect cause of named outlets bug https://github.com/angular/angular/issues/10726
@@ -14,7 +14,7 @@ import { GameScreenRouterService } from './services/game-screen-router.service';
 			{ path: '', redirectTo: 'game' },
 			{
 				path: 'game',
-				component: GameScreensComponent,
+				component: GameComponent,
 				children: [
 					{
 						path: '',

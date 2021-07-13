@@ -2,11 +2,13 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import './styles/utilities';
+
+
 body {
-    position: relative;
     min-height: 100vh;
     margin: 0;
-    padding-bottom: 8.5rem;
+    background-color: lighten(black, 40%);
     font-family: 'Poppins', Roboto, "Helvetica Neue", sans-serif;
  }
 

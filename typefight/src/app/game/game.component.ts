@@ -5,11 +5,11 @@ interface Screen {
 }
 
 @Component({
-	selector: 'app-game-screens',
-	templateUrl: './game-screens.component.html',
-	styleUrls: ['./game-screens.component.scss'],
+	selector: 'app-game',
+	templateUrl: './game.component.html',
+	styleUrls: ['./game.component.scss'],
 })
-export class GameScreensComponent {
+export class GameComponent {
 	screens: Screen[] = [{ outletName: 'leftScreen' }, { outletName: 'rightScreen' }];
 
 	constructor() {}
