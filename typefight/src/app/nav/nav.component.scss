@@ -1,0 +1,16 @@
+.root {
+  // Use grid because in real world the nav could get complicated very soon, and handling it with flexboxes only sucks.
+  display: grid;
+  grid-template:
+    ". logo . . auth ." 80px
+    / 2rem 15rem auto auto 20rem 3rem;
+
+    .logo {
+      grid-area: logo;
+      background-image: url('/assets/logo.png');
+    }
+
+    .auth {
+      grid-area: auth;
+    }
+}

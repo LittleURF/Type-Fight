@@ -5,17 +5,17 @@ import { PlayComponent } from './game-screen/play/play.component';
 import { ScoreboardComponent } from './game-screen/scoreboard/scoreboard.component';
 import { GameComponent } from './game.component';
 
-enum gameRoutePaths {
+enum gameScreenRoutePaths {
 	scoreboard = 'scoreboard',
 	howTo = 'how-to',
 	play = 'play',
 }
 
-const gameRoutes: Routes = [
-	{ path: gameRoutePaths.scoreboard, component: ScoreboardComponent },
-	{ path: gameRoutePaths.howTo, component: HowToComponent },
-	{ path: gameRoutePaths.play, component: PlayComponent },
-	{ path: '', redirectTo: gameRoutePaths.play },
+const gameScreenRoutes: Routes = [
+	{ path: gameScreenRoutePaths.scoreboard, component: ScoreboardComponent },
+	{ path: gameScreenRoutePaths.howTo, component: HowToComponent },
+	{ path: gameScreenRoutePaths.play, component: PlayComponent },
+	{ path: '', redirectTo: gameScreenRoutePaths.play },
 ];
 
 enum routePaths {
@@ -31,12 +31,12 @@ const routes: Routes = [
 		children: [
 			{
 				path: '',
-				children: gameRoutes,
+				children: gameScreenRoutes,
 				outlet: 'leftScreen',
 			},
 			{
 				path: '',
-				children: gameRoutes,
+				children: gameScreenRoutes,
 				outlet: 'rightScreen',
 			},
 		],
