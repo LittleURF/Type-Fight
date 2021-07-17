@@ -13,9 +13,4 @@ export class GameScreenComponent implements OnInit {
 	constructor(private screenRouter: GameScreenRouterService) {}
 
 	ngOnInit(): void {}
-
-	navigate(path: string): void {
-		// navigate with using the screen outlet name somehow
-		this.screenRouter.navigate();
-	}
 }
