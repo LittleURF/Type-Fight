@@ -1,1 +1,6 @@
-<p>scoreboard works!</p>
+<h2 class="text-3xl pt-8 pb-4 text-center">Scoreboard</h2>
+<ul class="ml-10 text-lg">
+  <li *ngFor="let i of [1500, 2100, 3400, 4000]; index as index;">
+    <p>{{ index }}. Hubert TYPEICON - {{ i }}</p>
+  </li>
+</ul>
