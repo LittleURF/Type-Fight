@@ -1,4 +1,4 @@
-export class GameScreenRouterService {
+export class ScreenRouterService {
 	constructor() {}
 
 	navigate(): void {}

@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HowToComponent } from './game-screen/how-to/how-to.component';
-import { PlayComponent } from './game-screen/play/play.component';
-import { ScoreboardComponent } from './game-screen/scoreboard/scoreboard.component';
+import { HowToComponent } from './screen/how-to/how-to.component';
+import { PlayComponent } from './screen/play/play.component';
+import { ScoreboardComponent } from './screen/scoreboard/scoreboard.component';
 import { GameComponent } from './game.component';
 
-enum gameScreenRoutePaths {
+enum screenRoutePaths {
 	scoreboard = 'scoreboard',
 	howTo = 'how-to',
 	play = 'play',
 }
 
-const gameScreenRoutes: Routes = [
-	{ path: gameScreenRoutePaths.scoreboard, component: ScoreboardComponent },
-	{ path: gameScreenRoutePaths.howTo, component: HowToComponent },
-	{ path: gameScreenRoutePaths.play, component: PlayComponent },
-	{ path: '', redirectTo: gameScreenRoutePaths.play },
+const screenRoutes: Routes = [
+	{ path: screenRoutePaths.scoreboard, component: ScoreboardComponent },
+	{ path: screenRoutePaths.howTo, component: HowToComponent },
+	{ path: screenRoutePaths.play, component: PlayComponent },
+	{ path: '', redirectTo: screenRoutePaths.play },
 ];
 
 enum routePaths {
@@ -31,12 +31,12 @@ const routes: Routes = [
 		children: [
 			{
 				path: '',
-				children: gameScreenRoutes,
+				children: screenRoutes,
 				outlet: 'leftScreen',
 			},
 			{
 				path: '',
-				children: gameScreenRoutes,
+				children: screenRoutes,
 				outlet: 'rightScreen',
 			},
 		],

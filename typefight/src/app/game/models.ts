@@ -1,3 +1,4 @@
-export interface Screen {
-	outletName: string;
+export enum GameType {
+	Words = 'Words',
+	Numbers = 'Numbers',
 }

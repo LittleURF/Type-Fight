@@ -1,9 +1,9 @@
 <div class="flex flex-1 justify-center h-full bg-gradient-to-t from-black to-gray-800">
-  <app-game-screen class="w-full" [screen]="screens[0]">
+  <app-screen class="w-full">
     <router-outlet name="leftScreen"></router-outlet>
-  </app-game-screen>
+  </app-screen>
   <hr class="vertical-full" />
-  <app-game-screen class="w-full" [screen]="screens[1]">
+  <app-screen class="w-full">
     <router-outlet name="rightScreen"></router-outlet>
-  </app-game-screen>
+  </app-screen>
 </div>

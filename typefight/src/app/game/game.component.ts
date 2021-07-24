@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Screen } from './models';
 
 @Component({
 	selector: 'app-game',
@@ -7,7 +6,9 @@ import { Screen } from './models';
 	styleUrls: ['./game.component.scss'],
 })
 export class GameComponent {
-	screens: Screen[] = [{ outletName: 'leftScreen' }, { outletName: 'rightScreen' }];
-
+	// In this place I'd like to know both of their states, like a general GameService
+	// How to control both the screens? events? inputs?
+	// a service injected in all 3 places?
+	// handle when the need actually arises...
 	constructor() {}
 }
