@@ -1,4 +1,4 @@
-import { GameType } from '../../models';
+import { GameType } from '../models';
 
 // outletNames in config have to match names defined in router outlets. Dynamic outlets arent setup yet.
 export const screensConfig = [

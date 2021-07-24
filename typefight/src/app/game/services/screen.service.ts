@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { SCREEN_CONFIG } from '../injection-tokens';
-import { ScreenConfig } from '../screen/screen-config/screen-config';
+import { ScreenConfig } from '../screen/screen-config';
 
 @Injectable()
 export class ScreenService {

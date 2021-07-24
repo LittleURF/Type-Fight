@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { SCREEN_CONFIG } from '../injection-tokens';
 import { ScreenService } from '../services/screen.service';
-import { ScreenConfig } from './screen-config/screen-config';
-import { getScreenConfigFactory } from './screen-config/screen-config-factory';
+import { ScreenConfig } from './screen-config';
+import { getScreenConfigFactory } from './screen-config-factory';
 
 @Component({
 	selector: 'app-screen',
