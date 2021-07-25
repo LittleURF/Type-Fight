@@ -1,7 +1,12 @@
 <div class="h-full flex items-center justify-center relative">
    <button class="absolute cursor-pointer border-t-2 border-b-2 border-gray-300 bg-primary-600 hover:bg-primary-800 text-gray-300 px-5 py-3"
-      [ngClass]="playButtonPositionClasses">
+      [ngClass]="playButtonPositionClasses"
+      (click)="readyUp()">
       PLAY
   </button>
   <div>PLAY WINDOW</div>
+  <div>timer</div>
+  <ng-container *ngIf="game$ | async as game">
+    {{ game.timerSeconds }}
+  </ng-container>
 </div>
