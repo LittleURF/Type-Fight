@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { overrideAndEmit } from 'src/app/core/utilities/functional';
 import { Game } from '../models/game';
 import { Screen } from '../models/Screen';
 
 @Injectable()
-export class GameService {
+export class GameService implements IGameConsumerService, IGameManagerService {
 	private game = new Game();
 	private gameSource$ = new BehaviorSubject<Game>(this.game);
 
@@ -19,31 +20,55 @@ export class GameService {
 	screenRight$ = this.screenRightSource$.asObservable();
 	screens$ = combineLatest([this.screenLeft$, this.screenRight$]);
 
-	constructor() {}
-
 	start(): void {
-		this.game.start();
-		this.gameSource$.next(this.game);
+		this.game = overrideAndEmit<Game>(this.game, this.gameSource$, {
+			isRunning: true,
+			timerSeconds: Game.timerBaseAmountSeconds,
+		});
+		this.runTimer();
 		this.resetReadiness();
 	}
 
 	stop(): void {}
 
-	readyUp(screen: string) {
-		if (screen === 'leftScreen') {
-			this.screenLeft.isReady = true;
-			this.screenLeftSource$.next(this.screenLeft);
-		} else if (screen === 'rightScreen') {
-			this.screenRight.isReady = true;
-			this.screenRightSource$.next(this.screenRight);
-		}
+	readyUp(whichScreen: string) {
+		const { screen, source } = this.getScreenSpecific(whichScreen);
+
+		overrideAndEmit<Screen>(screen, source, { isReady: true });
 	}
 
 	private resetReadiness(): void {
-		this.screenLeft.isReady = false;
-		this.screenLeftSource$.next(this.screenLeft);
-
-		this.screenRight.isReady = false;
-		this.screenRightSource$.next(this.screenRight);
+		this.screenLeft = overrideAndEmit<Screen>(this.screenLeft, this.screenLeftSource$, { isReady: false });
+		this.screenRight = overrideAndEmit<Screen>(this.screenRight, this.screenRightSource$, { isReady: false });
 	}
+
+	private runTimer() {
+		const decrementInterval = setInterval(() => {
+			if (this.game.timerSeconds === 0) {
+				this.game = overrideAndEmit<Game>(this.game, this.gameSource$, { isRunning: false });
+				clearInterval(decrementInterval);
+			} else {
+				this.game = overrideAndEmit<Game>(this.game, this.gameSource$, { timerSeconds: this.game.timerSeconds - 1 });
+			}
+		}, 1000);
+	}
+
+	private getScreenSpecific(whichScreen: string): { screen: Screen; source: Subject<Screen> } {
+		if (whichScreen === 'leftScreen') {
+			return { screen: this.screenLeft, source: this.screenLeftSource$ };
+		} else if (whichScreen === 'rightScreen') {
+			return { screen: this.screenRight, source: this.screenRightSource$ };
+		}
+	}
+}
+
+export interface IGameManagerService {
+	screens$: Observable<Screen[]>;
+	start(): void;
+	stop(): void;
+}
+
+export interface IGameConsumerService {
+	game$: Observable<Game>;
+	readyUp(whichScreen: string): void;
 }

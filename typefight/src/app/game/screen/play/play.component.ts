@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SCREEN_CONFIG } from '../../injection-tokens';
+import { I_GAME_COSNUMER_SERVICE, SCREEN_CONFIG } from '../../injection-tokens';
 import { Game } from '../../models/game';
-import { GameService } from '../../services/game.service';
+import { IGameConsumerService } from '../../services/game.service';
 import { ScreenConfig } from '../screen-config';
 
 @Component({
@@ -14,7 +14,10 @@ export class PlayComponent implements OnInit {
 	playButtonPositionClasses: string[] = [];
 	game$: Observable<Game>;
 
-	constructor(@Inject(SCREEN_CONFIG) private config: ScreenConfig, private gameService: GameService) {
+	constructor(
+		@Inject(SCREEN_CONFIG) private config: ScreenConfig,
+		@Inject(I_GAME_COSNUMER_SERVICE) private gameConsumerService: IGameConsumerService
+	) {
 		// Dont care
 		this.playButtonPositionClasses.push(this.config.outletName === 'leftScreen' ? 'right-0' : 'left-0');
 		this.playButtonPositionClasses.push(this.config.outletName === 'leftScreen' ? 'rounded-l-lg' : 'rounded-r-lg');
@@ -22,10 +25,10 @@ export class PlayComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.game$ = this.gameService.game$;
+		this.game$ = this.gameConsumerService.game$;
 	}
 
 	readyUp(): void {
-		this.gameService.readyUp(this.config.outletName);
+		this.gameConsumerService.readyUp(this.config.outletName);
 	}
 }

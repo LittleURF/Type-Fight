@@ -9,10 +9,16 @@ import { HowToComponent } from './screen/how-to/how-to.component';
 import { PlayComponent } from './screen/play/play.component';
 import { ScoreboardComponent } from './screen/scoreboard/scoreboard.component';
 import { GameService } from './services/game.service';
+import { I_GAME_COSNUMER_SERVICE, I_GAME_MANAGER_SERVICE } from './injection-tokens';
 
 @NgModule({
 	declarations: [GameComponent, ScreenComponent, PlayComponent, HowToComponent, ScoreboardComponent],
 	imports: [CommonModule, SharedModule, GameRoutingModule],
-	providers: [ScreenRouterService, GameService],
+	providers: [
+		ScreenRouterService,
+		GameService,
+		{ provide: I_GAME_MANAGER_SERVICE, useExisting: GameService },
+		{ provide: I_GAME_COSNUMER_SERVICE, useExisting: GameService },
+	],
 })
 export class GameModule {}
