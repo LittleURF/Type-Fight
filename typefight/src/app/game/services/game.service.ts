@@ -62,6 +62,7 @@ export class GameService implements IGameConsumerService, IGameManagerService {
 	}
 }
 
+// These could be facades:) but whatever
 export interface IGameManagerService {
 	screens$: Observable<Screen[]>;
 	start(): void;

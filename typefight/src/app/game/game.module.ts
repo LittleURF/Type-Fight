@@ -10,10 +10,21 @@ import { PlayComponent } from './screen/play/play.component';
 import { ScoreboardComponent } from './screen/scoreboard/scoreboard.component';
 import { GameService } from './services/game.service';
 import { I_GAME_COSNUMER_SERVICE, I_GAME_MANAGER_SERVICE } from './injection-tokens';
+import { EffectsModule } from '@ngrx/effects';
+import { GameEffects } from './state/game.effects';
+import { StoreModule } from '@ngrx/store';
+import { PlayEffects } from './screen/play/state/play.effects';
+import * as fromFeature from './state.index';
 
 @NgModule({
 	declarations: [GameComponent, ScreenComponent, PlayComponent, HowToComponent, ScoreboardComponent],
-	imports: [CommonModule, SharedModule, GameRoutingModule],
+	imports: [
+		CommonModule,
+		SharedModule,
+		GameRoutingModule,
+		StoreModule.forFeature(fromFeature.featureKey, fromFeature.reducers),
+		EffectsModule.forFeature([GameEffects, PlayEffects]),
+	],
 	providers: [
 		ScreenRouterService,
 		GameService,

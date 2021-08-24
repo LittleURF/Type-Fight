@@ -1,5 +1,8 @@
-export class Game {
-	static timerBaseAmountSeconds = 60;
-	isRunning = false;
-	timerSeconds = Game.timerBaseAmountSeconds;
+export interface Game {
+	isRunning: boolean;
+	timerSeconds: number;
+}
+
+export interface GameConfig {
+	timerBaseAmountSeconds: number;
 }
