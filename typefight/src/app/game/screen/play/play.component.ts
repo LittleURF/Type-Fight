@@ -1,14 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { I_GAME_COSNUMER_SERVICE, SCREEN_CONFIG } from '../../injection-tokens';
+import { SCREEN_CONFIG } from '../../injection-tokens';
 import { Game } from '../../models/game';
 import { Screens } from '../../models/Screen';
-import { IGameConsumerService } from '../../services/game.service';
 import { State } from '../../state.index';
-import { game } from '../../state/game.selectors';
 import { ScreenConfig } from '../screen-config';
-import { readyUp } from './state/play.actions';
+import * as GameSelectors from '../../state/game.selectors';
+import * as PlayActions from './state/play.actions';
 
 @Component({
 	selector: 'app-play',
@@ -27,10 +26,10 @@ export class PlayComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.game$ = this.store.select(game);
+		this.game$ = this.store.select(GameSelectors.game);
 	}
 
 	readyUp(): void {
-		this.store.dispatch(readyUp({ whichScreen: this.config.whichScreen }));
+		this.store.dispatch(PlayActions.readyUp({ whichScreen: this.config.whichScreen }));
 	}
 }
