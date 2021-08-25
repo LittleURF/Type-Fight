@@ -1,26 +1,22 @@
-import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
-import { override } from 'src/app/core/utilities/functional';
 import { Game, GameConfig } from '../models/game';
 import * as GameActions from './game.actions';
 
-export interface State {
-	game: Game;
-	gameConfig: GameConfig;
+export interface State extends Game {
+	config: GameConfig;
 }
 
 export const initialState: State = {
-	game: {
-		isRunning: false,
-		timerSeconds: 0,
-	},
-	gameConfig: {
-		timerBaseAmountSeconds: 60,
+	isRunning: false,
+	timerSeconds: 10,
+	config: {
+		timerBaseAmountSeconds: 10,
 	},
 };
 
 export const reducer = createReducer(
 	initialState,
-	on(GameActions.startGame, (state) => ({ ...state, game: override(state.game, { isRunning: true }) })),
-	on(GameActions.finishGame, (state) => ({ ...state, game: override(state.game, { isRunning: false }) }))
+	on(GameActions.startGame, (state) => ({ ...state, isRunning: true, timerSeconds: state.config.timerBaseAmountSeconds })),
+	on(GameActions.finishGame, (state) => ({ ...state, isRunning: false })),
+	on(GameActions.decrementGameTimer, (state) => ({ ...state, timerSeconds: state.timerSeconds - 1 }))
 );

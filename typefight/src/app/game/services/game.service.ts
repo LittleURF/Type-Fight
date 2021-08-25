@@ -6,7 +6,7 @@ import { Screen } from '../models/Screen';
 
 @Injectable()
 export class GameService implements IGameConsumerService, IGameManagerService {
-	private game = new Game();
+	private game = null;
 	private gameSource$ = new BehaviorSubject<Game>(this.game);
 
 	private screenLeft = new Screen();
@@ -23,7 +23,7 @@ export class GameService implements IGameConsumerService, IGameManagerService {
 	start(): void {
 		this.game = overrideAndEmit<Game>(this.game, this.gameSource$, {
 			isRunning: true,
-			timerSeconds: Game.timerBaseAmountSeconds,
+			timerSeconds: 60,
 		});
 		this.runTimer();
 		this.resetReadiness();

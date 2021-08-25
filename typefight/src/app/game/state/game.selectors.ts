@@ -1,4 +1,5 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromGame from './game.reducer';
+import { createSelector } from '@ngrx/store';
+import * as fromFeature from '../state.index';
 
-export const gameState = createFeatureSelector<fromGame.State>(fromGame.gameFeatureKey);
+export const game = createSelector(fromFeature.selectFeatureState, (state) => state.game);
+export const timer = createSelector(game, (state) => state.timerSeconds);

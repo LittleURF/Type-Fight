@@ -1,20 +1,47 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
-import { concatMap } from 'rxjs/operators';
-import { Observable, EMPTY } from 'rxjs';
-
+import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { interval } from 'rxjs';
+import { State } from '../state.index';
 import * as GameActions from './game.actions';
+import * as GameSelectors from './game.selectors';
+import * as PlaySelectors from '../screen/play/state/play.selectors';
 
 @Injectable()
 export class GameEffects {
-	loadGames$ = createEffect(() => {
-		return this.actions$.pipe(
-			ofType(GameActions.startGame),
-			/** An EMPTY observable only emits completion. Replace with your own observable API request */
-			concatMap(() => EMPTY as Observable<{ type: string }>)
+	startWhenPlayersReady$ = createEffect(() => {
+		return this.store.select(PlaySelectors.bothPlayersReady).pipe(
+			filter((bothPlayersReady) => bothPlayersReady),
+			map((_) => GameActions.startGame())
 		);
 	});
 
-	constructor(private actions$: Actions) {}
+	runGameTimer$ = createEffect(
+		() => {
+			return this.actions$.pipe(
+				ofType(GameActions.startGame),
+				switchMap(() =>
+					interval(1000).pipe(
+						tap(() => {
+							this.store.dispatch(GameActions.decrementGameTimer());
+						}),
+						takeUntil(this.actions$.pipe(ofType(GameActions.finishGame)))
+					)
+				)
+			);
+		},
+		{
+			dispatch: false,
+		}
+	);
+
+	finishWhenTimerExpires$ = createEffect(() => {
+		return this.store.select(GameSelectors.timer).pipe(
+			filter((timer) => timer <= 0),
+			map((_) => GameActions.finishGame())
+		);
+	});
+
+	constructor(private actions$: Actions, private store: Store<State>) {}
 }
