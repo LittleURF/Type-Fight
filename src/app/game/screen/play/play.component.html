@@ -2,13 +2,16 @@
 	class="h-full flex items-center justify-center relative"
 	*ngIf="{
 		game: game$ | async,
-		isReady: isReady$ | async
+		screen: screen$ | async
 	} as data">
 	<button
 		class="play-button absolute cursor-pointer border-t-2 border-b-2 border-gray-300 bg-primary-600 hover:bg-primary-800 text-gray-300 px-5 py-3"
-		[ngClass]="[playButtonPositionClasses, data.isReady ? 'bg-primary-800' : '', data.game?.isRunning ? 'hidden' : '']"
+		[ngClass]="[playButtonPositionClasses, data.screen?.isReady ? 'bg-primary-800' : '', data.game?.isRunning ? 'hidden' : '']"
 		(click)="readyUp()">
 		PLAY
 	</button>
+  <div>
+    <span *ngFor="let word of data.screen?.words">{{ word.content }} </span>
+  </div>
 	<span>{{ data.game?.timerSeconds }}</span>
 </div>

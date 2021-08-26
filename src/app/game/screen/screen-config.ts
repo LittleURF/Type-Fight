@@ -1,5 +1,4 @@
-import { GameType } from '../models/misc';
-import { Screens } from '../models/Screen';
+import { GameType, Screens } from '../models/misc';
 
 // whichScreen's in config have to match names defined in router outlets. Dynamic outlets arent setup yet. ;)
 export const screensConfig: ScreenConfig[] = [

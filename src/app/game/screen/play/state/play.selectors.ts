@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { Screens } from 'src/app/game/models/Screen';
+import { Screens } from 'src/app/game/models/misc';
 import * as fromFeature from '../../../state.index';
 
 export const playState = createSelector(fromFeature.selectFeatureState, (state) => state.play);

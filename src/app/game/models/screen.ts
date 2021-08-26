@@ -1,9 +1,7 @@
-export class Screen {
+import { Word } from './word';
+
+export interface Screen {
 	isReady: boolean;
 	score: number;
-}
-
-export enum Screens {
-	left = 'leftScreen',
-	right = 'rightScreen',
+	words: Word[];
 }

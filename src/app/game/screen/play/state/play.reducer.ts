@@ -1,7 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { Screen, Screens } from 'src/app/game/models/Screen';
+import { Screen } from 'src/app/game/models/Screen';
 import * as PlayActions from './play.actions';
 import * as GameActions from '../../../state/game.actions';
+import { Word } from 'src/app/game/models/word';
+import { editBothScreens, editScreenSpecific } from './play.reducer.util';
 
 export interface State {
 	leftScreen: Screen;
@@ -12,32 +14,25 @@ export const initialState: State = {
 	leftScreen: {
 		isReady: false,
 		score: 0,
+		words: [],
 	},
 	rightScreen: {
 		isReady: false,
 		score: 0,
+		words: [],
 	},
 };
 
 export const reducer = createReducer(
 	initialState,
 	on(PlayActions.readyUp, (state, action) => editScreenSpecific(state, action.whichScreen, (screen) => ({ ...screen, isReady: true }))),
-	on(GameActions.finishGame, (state) => editBothScreens(state, (screen) => ({ ...screen, isReady: false })))
+	on(GameActions.startGame, (state) => editBothScreens(state, (screen) => ({ ...screen, words: generateWords() }))),
+	on(GameActions.finishGame, (state) => editBothScreens(state, (screen) => ({ ...screen, isReady: false, words: [] })))
 );
 
-const editBothScreens = (state: State, handler: (screen: Screen) => Screen): State => {
-	const updatedLeftScreen = handler(state.leftScreen);
-	const updatedRightScreen = handler(state.leftScreen);
+// can then seperate out the methods to different files for cleaner code
+const generateWords = (): Word[] => {
+	const availableWords = ['Hello', 'This', 'Is', 'My', 'Roommate', 'Steve', 'And', 'This', 'Has', 'Been', 'Bojack', 'Horseman'];
 
-	return { ...state, leftScreen: updatedLeftScreen, rightScreen: updatedRightScreen };
-};
-
-const editScreenSpecific = (state: State, whichScreen: Screens, handler: (screen: Screen) => Screen): State => {
-	const updatedScreen = handler(state[whichScreen]);
-
-	if (whichScreen === Screens.left) {
-		return { ...state, leftScreen: updatedScreen };
-	} else if (whichScreen === Screens.right) {
-		return { ...state, rightScreen: updatedScreen };
-	}
+	return availableWords.map((word) => new Word(word));
 };

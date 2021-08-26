@@ -3,12 +3,13 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SCREEN_CONFIG } from '../../injection-tokens';
 import { Game } from '../../models/game';
-import { Screens } from '../../models/Screen';
 import { State } from '../../state.index';
 import { ScreenConfig } from '../screen-config';
 import * as GameSelectors from '../../state/game.selectors';
 import * as PlayActions from './state/play.actions';
 import * as PlaySelectors from './state/play.selectors';
+import { Screens } from '../../models/misc';
+import { Screen } from '../../models/Screen';
 
 @Component({
 	selector: 'app-play',
@@ -18,7 +19,7 @@ import * as PlaySelectors from './state/play.selectors';
 export class PlayComponent implements OnInit {
 	playButtonPositionClasses: string = '';
 	game$: Observable<Game>;
-	isReady$: Observable<boolean>;
+	screen$: Observable<Screen>;
 
 	constructor(@Inject(SCREEN_CONFIG) private config: ScreenConfig, private store: Store<State>) {
 		this.addPlayButtonPositionClasses();
@@ -26,7 +27,7 @@ export class PlayComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.game$ = this.store.select(GameSelectors.game);
-		this.isReady$ = this.store.select(PlaySelectors.playerReady(this.config.whichScreen));
+		this.screen$ = this.store.select(PlaySelectors.screenState(this.config.whichScreen));
 	}
 
 	readyUp(): void {
