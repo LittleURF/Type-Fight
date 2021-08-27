@@ -22,6 +22,7 @@
     "@ngrx/effects": "^12.4.0",
     "@ngrx/store": "^12.4.0",
     "@ngrx/store-devtools": "^12.4.0",
+    "random-words": "^1.1.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
@@ -40,6 +41,7 @@
     "@tailwindcss/typography": "github:tailwindcss/typography",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "@types/random-words": "^1.1.2",
     "@typescript-eslint/eslint-plugin": "4.28.2",
     "@typescript-eslint/parser": "4.28.2",
     "eslint": "^7.26.0",
