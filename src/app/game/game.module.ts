@@ -13,6 +13,8 @@ import { GameEffects } from './state/game.effects';
 import { StoreModule } from '@ngrx/store';
 import { PlayEffects } from './screen/play/state/play.effects';
 import * as fromFeature from './state.index';
+import { screensConfig } from './screen/screen-config';
+import { SCREENS_CONFIG } from './injection-tokens';
 
 @NgModule({
 	declarations: [GameComponent, ScreenComponent, PlayComponent, HowToComponent, ScoreboardComponent],
@@ -23,6 +25,6 @@ import * as fromFeature from './state.index';
 		StoreModule.forFeature(fromFeature.featureKey, fromFeature.reducers),
 		EffectsModule.forFeature([GameEffects, PlayEffects]),
 	],
-	providers: [ScreenRouterService],
+	providers: [ScreenRouterService, { provide: SCREENS_CONFIG, useValue: screensConfig }],
 })
 export class GameModule {}

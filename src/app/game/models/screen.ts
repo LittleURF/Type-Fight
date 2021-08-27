@@ -1,7 +1,7 @@
-import { Word } from './word';
+import { ToType } from './to-type';
 
 export interface Screen {
 	isReady: boolean;
 	score: number;
-	words: Word[];
+	toType: ToType<any>[];
 }

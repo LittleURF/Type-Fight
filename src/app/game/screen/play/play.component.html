@@ -11,7 +11,7 @@
 		PLAY
 	</button>
   <div>
-    <span *ngFor="let word of data.screen?.words">{{ word.content }} </span>
+    <span *ngFor="let toType of data.screen?.toType">{{ toType.content }} </span>
   </div>
 	<span>{{ data.game?.timerSeconds }}</span>
 </div>
