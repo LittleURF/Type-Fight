@@ -8,7 +8,7 @@ export interface State extends Game {
 
 export const initialState: State = {
 	isRunning: false,
-	timerSeconds: 10,
+	timerSeconds: 0,
 	config: {
 		timerBaseAmountSeconds: 10,
 	},
