@@ -15,9 +15,19 @@ import { PlayEffects } from './screen/play/state/play.effects';
 import * as fromFeature from './state.index';
 import { screensConfig } from './screen/screen-config';
 import { SCREENS_CONFIG } from './injection-tokens';
+import { TimerComponent } from './screen/play/timer/timer.component';
+import { TypingBoardComponent } from './screen/play/typing-board/typing-board.component';
 
 @NgModule({
-	declarations: [GameComponent, ScreenComponent, PlayComponent, HowToComponent, ScoreboardComponent],
+	declarations: [
+		GameComponent,
+		ScreenComponent,
+		PlayComponent,
+		HowToComponent,
+		ScoreboardComponent,
+		TimerComponent,
+		TypingBoardComponent,
+	],
 	imports: [
 		CommonModule,
 		SharedModule,
